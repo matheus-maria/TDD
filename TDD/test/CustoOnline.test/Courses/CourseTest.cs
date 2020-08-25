@@ -1,4 +1,5 @@
 ﻿using CursoOnline.Data;
+using CursoOnline.test._Util;
 using System;
 using Xunit;
 
@@ -23,8 +24,7 @@ namespace CursoOnline.test.Courses
       [InlineData(null)]
       public void MustNotCourseHaveInvalidName(string name)
       {
-         var message = Assert.Throws<ArgumentException>(() => new Course(name, 1, TargetAudience.Estudante, 1)).Message;
-         Assert.Equal("Property 'Name' is Invalid.", message);
+         Assert.Throws<ArgumentException>(() => new Course(name, 1, TargetAudience.Estudante, 1)).WithMessage("Property 'Name' is Invalid.");
       }
 
       [Theory(DisplayName = "MustNotCourseHaveWorkloadSmallerThan1")]
@@ -32,8 +32,7 @@ namespace CursoOnline.test.Courses
       [InlineData(0)]
       public void MustNotCourseHaveWorkloadSmallerThan1(double workload)
       {
-         var message = Assert.Throws<ArgumentException>(() => new Course("teste",workload, TargetAudience.Estudante, 1)).Message;
-         Assert.Equal("Property 'Workload' must need to be greater than zero.", message);
+         Assert.Throws<ArgumentException>(() => new Course("teste",workload, TargetAudience.Estudante, 1)).WithMessage("Property 'Workload' must need to be greater than zero.");
       }
 
       [Theory(DisplayName = "MustNotCourseHaveValueGreaterThan0")]
@@ -41,8 +40,7 @@ namespace CursoOnline.test.Courses
       [InlineData(-10)]
       public void MustNotCourseHaveValueGreaterThan0(double value)
       {
-         var message = Assert.Throws<ArgumentException>(() => new Course("teste", 1, TargetAudience.Estudante, value)).Message;
-         Assert.Equal("Property 'Value' must be a positive value.", message);
+         Assert.Throws<ArgumentException>(() => new Course("teste", 1, TargetAudience.Estudante, value)).WithMessage("Property 'Value' must be a positive value.");
       }
    }
 }
