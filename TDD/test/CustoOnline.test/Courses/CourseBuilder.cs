@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using CursoOnline.Data;
- 
-namespace CursoOnline.test._Builders
+
+namespace CursoOnline.test.Courses
 {
    public class CourseBuilder
    {
