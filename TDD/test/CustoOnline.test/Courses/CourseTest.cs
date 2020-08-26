@@ -1,4 +1,6 @@
-﻿using CursoOnline.Data;
+﻿using Bogus;
+using CursoOnline.Data;
+using CursoOnline.test._Builders;
 using CursoOnline.test._Util;
 using System;
 using Xunit;
@@ -6,14 +8,22 @@ using Xunit;
 namespace CursoOnline.test.Courses
 {
    public class CourseTest
-   {
-      [Theory(DisplayName = "MustCreateCourse")]
-      [InlineData("Informática Básica",80, TargetAudience.Estudante, 950)]
-      public void MustCreateCourse(string name, double workload, TargetAudience targetAudience, double value)
+   {    
+      [Fact(DisplayName = "MustCreateCourse")]
+      public void MustCreateCourse()
       {
-         var course = new Course(name, workload, targetAudience, value);
+         var facker = new Faker();
+
+         string name = facker.Name.FullName();
+         string description = facker.Lorem.Paragraph();
+         double workload = facker.Random.Double(1, 100000);
+         TargetAudience targetAudience = TargetAudience.Estudante;
+         double value = facker.Finance.Random.Double(0, 100000);
+
+         var course = new Course(name, description, workload, targetAudience, value);
 
          Assert.Equal(name, course.Name);
+         Assert.Equal(description, course.Description);
          Assert.Equal(workload, course.Workload);
          Assert.Equal(targetAudience, course.TargetAudience);
          Assert.Equal(value, course.Value);
@@ -24,7 +34,8 @@ namespace CursoOnline.test.Courses
       [InlineData(null)]
       public void MustNotCourseHaveInvalidName(string name)
       {
-         Assert.Throws<ArgumentException>(() => new Course(name, 1, TargetAudience.Estudante, 1)).WithMessage("Property 'Name' is Invalid.");
+         Assert.Throws<ArgumentException>(() => CourseBuilder.Builder().WithName(name).Build())
+            .WithMessage("Property 'Name' is Invalid.");
       }
 
       [Theory(DisplayName = "MustNotCourseHaveWorkloadSmallerThan1")]
@@ -32,7 +43,8 @@ namespace CursoOnline.test.Courses
       [InlineData(0)]
       public void MustNotCourseHaveWorkloadSmallerThan1(double workload)
       {
-         Assert.Throws<ArgumentException>(() => new Course("teste",workload, TargetAudience.Estudante, 1)).WithMessage("Property 'Workload' must need to be greater than zero.");
+         Assert.Throws<ArgumentException>(() => CourseBuilder.Builder().WithWorkload(workload).Build())
+            .WithMessage("Property 'Workload' must need to be greater than zero.");
       }
 
       [Theory(DisplayName = "MustNotCourseHaveValueGreaterThan0")]
@@ -40,7 +52,8 @@ namespace CursoOnline.test.Courses
       [InlineData(-10)]
       public void MustNotCourseHaveValueGreaterThan0(double value)
       {
-         Assert.Throws<ArgumentException>(() => new Course("teste", 1, TargetAudience.Estudante, value)).WithMessage("Property 'Value' must be a positive value.");
-      }
+         Assert.Throws<ArgumentException>(() => CourseBuilder.Builder().WithValue(value).Build())
+            .WithMessage("Property 'Value' must be a positive value.");
+      }      
    }
 }

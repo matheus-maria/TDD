@@ -6,9 +6,10 @@ namespace CursoOnline.Data
 
    public class Course
    {
-      public Course(string name, double workload, TargetAudience targetAudience, double value)
+      public Course(string name, string description, double workload, TargetAudience targetAudience, double value)
       {
          this.Name = name;
+         this.Description = description;
          this.Workload = workload;
          this.TargetAudience = targetAudience;
          this.Value = value;
@@ -22,6 +23,16 @@ namespace CursoOnline.Data
                throw new ArgumentException("Property 'Name' is Invalid.");
             else
                _name = value;
+         }
+      }
+
+      private string _description;
+      public string Description
+      {
+         get => _description;
+         private set 
+         {
+            _description = value;
          }
       }
 
