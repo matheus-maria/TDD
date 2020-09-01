@@ -11,13 +11,13 @@ namespace CursoOnline.test.Courses
       [Fact(DisplayName = "MustCreateCourse")]
       public void MustCreateCourse()
       {
-         var facker = new Faker();
+         var faker = new Faker();
 
-         string name = facker.Name.FullName();
-         string description = facker.Lorem.Paragraph();
-         double workload = facker.Random.Double(1, 100000);
+         string name = faker.Name.FullName();
+         string description = faker.Lorem.Paragraph();
+         double workload = faker.Random.Double(1, 100000);
          TargetAudience targetAudience = TargetAudience.Estudante;
-         double value = facker.Finance.Random.Double(0, 100000);
+         double value = faker.Finance.Random.Double(0, 100000);
 
          var course = new Course(name, description, workload, targetAudience, value);
 
