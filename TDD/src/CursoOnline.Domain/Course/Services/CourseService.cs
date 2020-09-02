@@ -18,7 +18,7 @@ namespace CursoOnline.Course.Services
       {
          // VALIDATE IF ALREADY EXITS THIS COURSE
          var existingCourse = _courseRepository.GetCourse(courseVM.Name);
-         if (existingCourse != null && courseVM.Id != existingCourse.Id)
+         if (existingCourse != null)
             throw new ArgumentException("Course already exists");
 
          // VALIDATE TARGET AUDIENCE

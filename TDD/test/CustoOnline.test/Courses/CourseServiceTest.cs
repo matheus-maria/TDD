@@ -59,7 +59,6 @@ namespace CursoOnline.test.Courses
       {
          var existingCourse = CourseBuilder.Builder().WithName(_courseVM.Name).Build();
          _courseRepository.Setup(x => x.GetCourse(_courseVM.Name)).Returns(existingCourse);
-         _courseVM.Id = -1;
 
          Assert.Throws<ArgumentException>(() => _courseService.Store(_courseVM))
             .WithMessage("Course already exists");
