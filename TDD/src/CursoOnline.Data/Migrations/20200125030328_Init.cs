@@ -7,7 +7,7 @@ namespace CursoOnline.Dados.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Courses",
+                name: "Course",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
@@ -20,14 +20,14 @@ namespace CursoOnline.Dados.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Courses", x => x.Id);
+                    table.PrimaryKey("PK_Course", x => x.Id);
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Courses");
+                name: "Course");
         }
     }
 }

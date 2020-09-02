@@ -16,6 +16,14 @@ namespace CursoOnline.Dados.Repositorios
 			if (entity.Any())
 				return entity.First();
 			return null;
-		}		
-	}
+		}
+
+      public override void Store(Course.Data.Course entity)
+      {
+			var value = Context.Set<Course.Data.Course>().Where(c => c.Name.Contains(entity.Name)).FirstOrDefault();
+
+			if(value == null)
+				base.Store(entity);
+      }
+   }
 }

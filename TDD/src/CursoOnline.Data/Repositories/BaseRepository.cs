@@ -14,7 +14,7 @@ namespace CursoOnline.Dados.Repositorios
 			Context = context;
 		}
 
-		public void Store(TEntity entity)
+		public virtual void Store(TEntity entity)
 		{
 			Context.Set<TEntity>().Add(entity);
 		}

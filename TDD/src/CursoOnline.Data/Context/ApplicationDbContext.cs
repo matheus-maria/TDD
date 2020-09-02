@@ -10,7 +10,7 @@ namespace CursoOnline.Dados.Contextos
 
 		}
 
-		public DbSet<Course.Data.Course> Courses { get; set; }
+		public DbSet<Course.Data.Course> Course { get; set; }
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
