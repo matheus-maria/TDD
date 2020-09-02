@@ -1,10 +1,11 @@
-﻿using System;
+﻿using CursoOnline.Domain.Base;
+using System;
 
 namespace CursoOnline.Course.Data
 {
    public enum TargetAudience { Estudante, Universitário, Empregado, Empreededor }
 
-   public class Course
+   public class Course : Entity
    {
       public Course(string name, string description, double workload, TargetAudience targetAudience, double value)
       {
