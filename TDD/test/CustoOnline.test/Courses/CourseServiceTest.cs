@@ -1,9 +1,7 @@
 ﻿using Bogus;
-using CursoOnline.Data;
-using CursoOnline.Interfaces;
-using CursoOnline.Services;
+using CursoOnline.Course.Data;
+using CursoOnline.Course.Services;
 using CursoOnline.test._Util;
-using CursoOnline.VMs;
 using Moq;
 using System;
 using Xunit;
@@ -13,15 +11,15 @@ namespace CursoOnline.test.Courses
    public class CourseServiceTest
    {
       // VARIABLES
-      public CourseVM _courseVM;
-      public Mock<ICourseRepository> _courseRepository;
+      public Course.VMs.CourseVM _courseVM;
+      public Mock<Course.Interfaces.ICourseRepository> _courseRepository;
       public CourseService _courseService;
 
       public CourseServiceTest()
       {
          var faker = new Faker();
 
-         _courseVM = new CourseVM
+         _courseVM = new Course.VMs.CourseVM
          {
             Name = faker.Name.FullName(),
             Description = faker.Lorem.Paragraph(),
@@ -30,7 +28,7 @@ namespace CursoOnline.test.Courses
             Value = faker.Finance.Random.Double(0, 100000)
          };
 
-         _courseRepository = new Mock<ICourseRepository>();
+         _courseRepository = new Mock<Course.Interfaces.ICourseRepository>();
          _courseService = new CourseService(_courseRepository.Object);
       }
 
@@ -39,7 +37,7 @@ namespace CursoOnline.test.Courses
       {
          _courseService.Store(_courseVM);
 
-         _courseRepository.Verify(x => x.Store(It.Is<Course>(x => x.Name == _courseVM.Name && 
+         _courseRepository.Verify(x => x.Store(It.Is<Course.Data.Course>(x => x.Name == _courseVM.Name && 
                                                                  x.Description == _courseVM.Description &&
                                                                  x.Workload == _courseVM.Workload &&
                                                                  x.TargetAudience == (TargetAudience)Enum.Parse(typeof(TargetAudience), _courseVM.TargetAudience) &&

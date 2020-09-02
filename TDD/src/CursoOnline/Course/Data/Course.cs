@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CursoOnline.Data
+namespace CursoOnline.Course.Data
 {
    public enum TargetAudience { Estudante, Universitário, Empregado, Empreededor }
 

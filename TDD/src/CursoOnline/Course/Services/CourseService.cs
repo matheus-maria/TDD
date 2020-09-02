@@ -1,13 +1,13 @@
-﻿using CursoOnline.Data;
-using CursoOnline.Interfaces;
-using CursoOnline.VMs;
+﻿using CursoOnline.Course.Data;
+using CursoOnline.Course.Interfaces;
+using CursoOnline.Course.VMs;
 using System;
 
-namespace CursoOnline.Services
+namespace CursoOnline.Course.Services
 {
    public class CourseService
    {
-      private ICourseRepository _courseRepository;
+      private readonly ICourseRepository _courseRepository;
 
       public CourseService(ICourseRepository courseRepository)
       {
@@ -22,12 +22,15 @@ namespace CursoOnline.Services
             throw new ArgumentException("Course already exists");
 
          // VALIDATE TARGET AUDIENCE
-         Enum.TryParse(typeof(TargetAudience), courseVM.TargetAudience, out var targetAudicence);
-         if (targetAudicence == null)
+         if(!Enum.TryParse<TargetAudience>(courseVM.TargetAudience, out var targetAudicence))
             throw new ArgumentException("Invalid Target Audience");
 
          // PREPARE DATA
-         var course = new Course(courseVM.Name, courseVM.Description, courseVM.Workload, (TargetAudience)targetAudicence, courseVM.Value);
+         var course = new Data.Course(courseVM.Name,
+                                 courseVM.Description,
+                                 courseVM.Workload,
+                                 targetAudicence,
+                                 courseVM.Value);
 
          // RESULT
          _courseRepository.Store(course);

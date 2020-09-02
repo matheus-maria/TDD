@@ -1,4 +1,4 @@
-﻿namespace CursoOnline.VMs
+﻿namespace CursoOnline.Course.VMs
 {
    public class CourseVM
    {

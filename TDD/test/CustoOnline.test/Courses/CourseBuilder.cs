@@ -1,5 +1,5 @@
 ﻿using Bogus;
-using CursoOnline.Data;
+using CursoOnline.Course.Data;
 
 namespace CursoOnline.test.Courses
 {
@@ -25,9 +25,9 @@ namespace CursoOnline.test.Courses
          return courseBuilder;
       }
 
-      public Course Build()
+      public Course.Data.Course Build()
       {
-         return new Course(_name, _description, _workload, _targetAudience, _value);
+         return new Course.Data.Course(_name, _description, _workload, _targetAudience, _value);
       }
 
       public CourseBuilder WithName(string name)

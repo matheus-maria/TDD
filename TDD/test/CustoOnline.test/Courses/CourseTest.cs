@@ -1,5 +1,5 @@
 ﻿using Bogus;
-using CursoOnline.Data;
+using CursoOnline.Course.Data;
 using CursoOnline.test._Util;
 using System;
 using Xunit;
@@ -19,7 +19,7 @@ namespace CursoOnline.test.Courses
          TargetAudience targetAudience = TargetAudience.Estudante;
          double value = faker.Finance.Random.Double(0, 100000);
 
-         var course = new Course(name, description, workload, targetAudience, value);
+         var course = new Course.Data.Course(name, description, workload, targetAudience, value);
 
          Assert.Equal(name, course.Name);
          Assert.Equal(description, course.Description);
